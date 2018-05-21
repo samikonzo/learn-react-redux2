@@ -1,3 +1,3 @@
 export default {
-	CHANGE_YEAR: 'CHANGE_YEAR',
+	CHANGE_ALBUM: 'CHANGE_ALBUM',
 }

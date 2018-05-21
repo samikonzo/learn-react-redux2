@@ -2,11 +2,11 @@ import constants from './constants.js'
 
 let l = console.log
 
-export function changeYear(year){
-	l('change year : ', year)
+export function changeAlbum(albumId){
+	l('change album : ', albumId)
 	
 	return {
-		type: constants.CHANGE_YEAR,
-		payload: year
+		type: constants.CHANGE_ALBUM,
+		payload: albumId
 	}
 }

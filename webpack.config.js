@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: './client/index.js',
+	entry: './client/index.jsx',
 	output: {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
@@ -15,7 +15,7 @@ module.exports = {
 				exclude: /(node_modules)/,
 				loader: "babel-loader",
 				options: {
-					presets:["env", "react"]
+					presets:["env", "stage-0", "react"]
 				}
 			},
 

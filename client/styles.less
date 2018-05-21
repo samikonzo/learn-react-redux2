@@ -1,0 +1,52 @@
+body{
+	
+}
+
+.PhotoBlock{
+	border: 1px dashed blue;
+}
+.PhotoBlock_albumName{
+	border: 1px dashed red;
+}
+
+.PhotoNav{
+	border: 1px dashed green;
+}
+.PhotoNav_link{
+	border: 1px dashed purple;
+}
+
+.PhotoGrid{
+	width: 100%;
+	position: relative;
+	border: 1px dashed red;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+.PhotoGrid_img-wrapper{
+	position: relative;
+	margin: 5px;
+	flex: 1 0 300px;
+	border: 1px solid green;
+	overflow: hidden;
+	padding-bottom: 30%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+}
+.PhotoGrid_img{
+	//position: relative;
+	//padding-bottom: 100%;
+	//padding-bottom: 50%;
+	position: absolute;
+	//max-width: 180px;
+	border: 1px dashed red;
+	min-height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

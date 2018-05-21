@@ -1,34 +1,61 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { changeYear } from '../redux/actions.js'
-
 let l = console.log
 
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { changeAlbum } from '../redux/actions.js'
+import { albums } from '../user.json'
+import PhotoNav from '../components/PhotoNav.jsx'
+import PhotoGrid from '../components/PhotoGrid.jsx'
 
-const mapStateToProps = (state) => {
-	return {
-		year: state.year
-	}
+let albumsNames = []
+for(var id in albums){
+	albumsNames.push({
+		id: id,
+		name: albums[id].name
+	})
 }
+
+
+
 
 class PhotoBlock extends Component {
+	state = {
+		albums, albumsNames
+	}
+
+
 	render() {
+		let { albums, albumsNames: names } = this.state 
+		let { selected } = this.props.album
+		let photo = selected ? albums[selected] : undefined
+
 		return (
-			<div 
-				className="PhotoBlock" 
-				onClick={(e) => {
-					this.props.onChangeYear(this.props.year + 1)
-				}}
-			>
-				<p>{this.props.year}</p>
+			<div className="PhotoBlock"> 
+				<PhotoNav onChangeAlbum={this.props.onChangeAlbum} names={names}/>
+				<h1 className="PhotoBlock_albumName"> {selected && albums[selected] && albums[selected].name} </h1>
+				<PhotoGrid photo={photo} />
 			</div>
-		);
+		)
+
 	}
 }
 
-PhotoBlock = connect(
-	mapStateToProps,
-	( dispatch ) => ({onChangeYear : (year) => (dispatch(changeYear(year)))})
-)(PhotoBlock)
+
+let mapStateToProps = (state) => {
+	return {
+		album: state.album
+	}
+}
+
+let mapDispatchToProps = (dispatch) =>{
+	return {
+		onChangeAlbum: ( albumId ) => {
+			dispatch( changeAlbum(albumId) )
+		}
+	}
+}
+
+
+PhotoBlock = connect( mapStateToProps, mapDispatchToProps )(PhotoBlock)
 
 export default PhotoBlock
