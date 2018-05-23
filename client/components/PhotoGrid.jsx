@@ -3,11 +3,13 @@ import Popup from './Popup.jsx'
 
 class PhotoGrid extends Component {
 	render() {
-		let { photo: album } = this.props
+		/*let { photo: album } = this.props
 
 		if(album){
 			var { photo } = album
-		} 
+		} */
+
+		let { photo } = this.props
 
 		return (
 			<div className="PhotoGrid">

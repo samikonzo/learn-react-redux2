@@ -22,15 +22,20 @@ body{
 	border: 1px dashed red;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 .PhotoGrid_img-wrapper{
+	@size : 30%;
+	@ratio: 1;
+	@ratioPercent: @size/@ratio;
+
 	position: relative;
 	margin: 5px;
-	flex: 1 0 300px;
+	flex: 0 0 @size;
+	max-width: @size + "px";
 	border: 1px solid green;
 	overflow: hidden;
-	padding-bottom: 30%;
+	padding-bottom: @ratioPercent;
 
 	display: flex;
 	flex-direction: column;
@@ -42,6 +47,7 @@ body{
 	//position: relative;
 	//padding-bottom: 100%;
 	//padding-bottom: 50%;
+	//display: none;
 	position: absolute;
 	//max-width: 180px;
 	border: 1px dashed red;

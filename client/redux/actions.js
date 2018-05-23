@@ -1,12 +1,19 @@
-import constants from './constants.js'
+import Constants from './constants.js'
 
 let l = console.log
 
-export function changeAlbum(albumId){
-	l('change album : ', albumId)
-	
+
+export let loadUser = data => {
 	return {
-		type: constants.CHANGE_ALBUM,
+		type: Constants.USER_LOAD,
+		payload: data
+	}
+}
+
+export let changeAlbum = albumId => {
+	return{
+		type: Constants.ALBUM_CHANGE,
 		payload: albumId
+
 	}
 }

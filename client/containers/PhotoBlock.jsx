@@ -3,47 +3,55 @@ let l = console.log
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { changeAlbum } from '../redux/actions.js'
-import { albums } from '../user.json'
 import PhotoNav from '../components/PhotoNav.jsx'
 import PhotoGrid from '../components/PhotoGrid.jsx'
-
-let albumsNames = []
-for(var id in albums){
-	albumsNames.push({
-		id: id,
-		name: albums[id].name
-	})
-}
 
 
 
 
 class PhotoBlock extends Component {
-	state = {
-		albums, albumsNames
-	}
-
-
 	render() {
-		let { albums, albumsNames: names } = this.state 
-		let { selected } = this.props.album
-		let photo = selected ? albums[selected] : undefined
+		//let { albums, albumsNames: names } = this.state 
+		//let { selected } = this.props.album
+		//let photo = selected ? albums[selected] : undefined
+		l(this.props)
+
+		let { albumsNames: names, albums, selectedAlbum: selected, onChangeAlbum } = this.props
+		
+		selected = {
+			...selected, 
+			...albumsFindById(albums, selected.id)
+		}
+		l(selected)
+		
 
 		return (
 			<div className="PhotoBlock"> 
-				<PhotoNav onChangeAlbum={this.props.onChangeAlbum} names={names}/>
-				<h1 className="PhotoBlock_albumName"> {selected && albums[selected] && albums[selected].name} </h1>
-				<PhotoGrid photo={photo} />
+				<PhotoNav onChangeAlbum={onChangeAlbum} names={names} />
+
+				<h3>{selected && selected.name} </h3>
+
+				<PhotoGrid photo={selected && selected.photo} />
+				
 			</div>
 		)
 
 	}
 }
 
+let albumsFindById = (albums, id) => {
+	for(var i = 0; i < albums.length; i++){
+		if(albums[i].id == id) return albums[i]
+	}
+}
+
 
 let mapStateToProps = (state) => {
+
+	let { albums, albumsNames, selectedAlbum } = state.album
+
 	return {
-		album: state.album
+		albums, albumsNames, selectedAlbum
 	}
 }
 

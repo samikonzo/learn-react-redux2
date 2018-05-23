@@ -1,6 +1,13 @@
 {
-	"albums" : {
-		"album_id_2k0v5d9228r" : {
+	"user" : {
+		"name" : "Sami",
+		"surname" : "Konzo",
+		"age" : "28"
+	},
+
+	"albums" : [
+		{
+			"id" : "album_id_2k0v5d9228r",
 			"name" : "2015",
 			"photo" : [
 				"https://78.media.tumblr.com/b3e1b9d79083d89724233b4af2b73ce0/tumblr_p8d0rx4bwg1w7ncbzo1_540.jpg",
@@ -12,7 +19,9 @@
 				"https://78.media.tumblr.com/d1b2bcf02b8ead16037b1d705ee0ab08/tumblr_p1h292qKej1vbcnq8o1_500.gif"				
 			] 
 		},
-		"album_id_31h3mucraqh" : {
+
+		{
+			"id" : "album_id_31h3mucraqh",
 			"name" : "2016",
 			"photo" : [
 				"https://78.media.tumblr.com/34de14e57fe8cc6e9818d1898e1073dd/tumblr_p91xngSVfm1vmobp0o1_1280.jpg",
@@ -23,7 +32,9 @@
 				"https://78.media.tumblr.com/3d02415a641c52149da4e2e17fbbd61c/tumblr_p91fgjxvq01vmobp0o3_r1_1280.jpg"
 			] 
 		},
-		"album_id_1b3okiv5g3p" : {
+		
+		{
+			"id" : "album_id_1b3okiv5g3p",
 			"name" : "2017",
 			"photo" : [
 				"https://78.media.tumblr.com/b70ab39f94e7bfa2be1929203b2a1d44/tumblr_okwhrt3ABM1rd81odo1_500.gif",
@@ -32,5 +43,5 @@
 				"https://78.media.tumblr.com/b876f3c8e0c394411f7bf20ae52f3abe/tumblr_okwhrt3ABM1rd81odo4_500.gif"
 			] 
 		}
-	}
+	]
 }
