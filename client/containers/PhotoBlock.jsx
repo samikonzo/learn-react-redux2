@@ -2,53 +2,92 @@ let l = console.log
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { albumChange, albumShowing, albumHidding, albumReady } from '../redux/actions.js'
+import { albumChange, albumShowing, albumHidding, albumPopupShow, albumPopupHide } from '../redux/actions.js'
 import PhotoNav from '../components/PhotoNav.jsx'
 import PhotoGrid from '../components/PhotoGrid.jsx'
+import Popup from '../components/Popup.jsx'
 
 
 
 
 class PhotoBlock extends Component {
+	state = {}
 
-	componentDidMount(){
-		/*let { slectedAlbum: selected } = this.props
-		if(selected && selected.id !== undefined && !selected.show){
-			l('componentDidMount albumShowHandler')
-			this.props.albumShowHandler()	
-		}*/
+	albumShowHandler = () => {
+		let { dispatch } = this.props
+
+		dispatch( albumShowing() )
 	}
 
-	componentWillReceiveProps(nextProps){
-		/*let { selectedAlbum: selected } = nextProps
-		if(selected && selected.id !== undefined && !selected.show){
-			l('nextProps albumShowHandler')
-			this.props.albumShowHandler()
-		}*/
+	albumHideHandler = () => {
+		let { dispatch } = this.props
+
+		dispatch( albumHidding() )
+	}
+
+	albumStartChanging = (albumId) => {
+		let { dispatch } = this.props
+
+		dispatch( albumHidding() )
+		setTimeout(() => {
+			dispatch( albumChange(albumId) )
+		}, 1000)
+	}
+
+	albumPopupShowHandler = (img) => {
+		let { dispatch } = this.props
+
+		dispatch( albumPopupShow(img) )
+	}
+
+	albumPopupHideHandler = () => {
+		let { dispatch } = this.props
+
+		dispatch( albumPopupHide() )
 	}
 
 	render() {
 		l(this.props)
 
-		let { albumsNames: names, albums, selectedAlbum: selected } = this.props
-		let { albumStartChanging, albumShowHandler, albumHideHandler, albumReadyHandler } = this.props
+		let { albumsNames: names, 
+				albums, 
+				selectedAlbum: selected, 
+				popup } = this.props
+
+		let { albumStartChanging, 
+				albumShowHandler, 
+				albumHideHandler, 
+				albumPopupShowHandler,
+				albumPopupHideHandler  } = this
+
 		
 		selected = {
 			...selected, 
 			...albumFindById(albums, selected.id)
 		}
 		
-		let PhotoBlockClass = 'PhotoBlock '
-		let PhotoGridClass = 'PhotoGrid '
-		if( selected.show ) PhotoGridClass += 'PhotoGrid--show'
+		let photoBlockClass = 'PhotoBlock '
+		let photoGridClass = 'PhotoGrid '
+		if( selected.show ) photoGridClass += 'PhotoGrid--show'
+		let albumNameClass = 'PhotoBlock_albumName '
+		if( selected.show ) albumNameClass += 'PhotoBlock_albumName--show'
 
 		return (
-			<div className={PhotoBlockClass}> 
+			<div className={photoBlockClass}> 
 				<PhotoNav albumChangeHandler={albumStartChanging} names={names} />
 
-				<h3>{selected && selected.name} </h3>
+				<h3 className={albumNameClass}>{selected && selected.name} </h3>
 
-				<PhotoGrid photo={selected && selected.photo} className={PhotoGridClass} showPhoto={albumShowHandler} albumId={selected.id}/>
+				<PhotoGrid 
+					photo={selected && selected.photo} 
+					className={photoGridClass} 
+					showPhoto={albumShowHandler} 
+					albumId={selected.id}
+					albumPopupShowHandler={albumPopupShowHandler}
+				/>
+
+				{popup.show && <Popup state={popup} albumPopupHideHandler={albumPopupHideHandler} popup={popup}/> }
+
 			</div>
 		)
 
@@ -63,37 +102,13 @@ let albumFindById = (albums, id) => {
 
 
 let mapStateToProps = (state) => {
-	let { albums, albumsNames, selectedAlbum } = state.album
+	let { albums, albumsNames, selectedAlbum, popup } = state.album
 	return {
-		albums, albumsNames, selectedAlbum
-	}
-}
-
-let mapDispatchToProps = (dispatch) =>{
-	return {
-		albumChangeHandler: ( albumId ) => {
-			dispatch( albumChange(albumId) )
-		},
-
-		albumShowHandler: () => {
-			dispatch( albumShowing() )
-		},
-
-		albumHideHandler: () => {
-			dispatch( albumHidding() )
-		},
-
-		albumStartChanging: (albumId) => {
-			dispatch( albumHidding() )
-			setTimeout(() => {
-				dispatch( albumChange(albumId) )
-			}, 1000)
-		},
-
+		albums, albumsNames, selectedAlbum, popup
 	}
 }
 
 
-PhotoBlock = connect( mapStateToProps, mapDispatchToProps )(PhotoBlock)
+PhotoBlock = connect( mapStateToProps )(PhotoBlock)
 
 export default PhotoBlock

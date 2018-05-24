@@ -32,3 +32,16 @@ export let albumHidding	= () => {
 		type: Constants.ALBUM_HIDDING,
 	}
 }
+
+export let albumPopupShow = (img) => {
+	return {
+		type: Constants.ALBUM_POPUP_SHOW,
+		payload: img
+	}
+}
+
+export let albumPopupHide = () => {
+	return {
+		type: Constants.ALBUM_POPUP_HIDE
+	}
+}

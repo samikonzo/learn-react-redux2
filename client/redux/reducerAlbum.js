@@ -13,6 +13,11 @@ let initState = {
 		id: undefined,
 		loading: false,
 		show: false,
+	},
+
+	popup: {
+		show: false,
+		img: undefined,
 	}
 }
 
@@ -70,11 +75,27 @@ let selectedAlbum = (state = initState.selectedAlbum, action) => {
 	}
 }
 
+let popup = (state = initState.popup, action) => {
+	switch(action.type){
+
+		case Constants.ALBUM_POPUP_SHOW: {
+			return {...state, show: true, img: action.payload}
+		};
+
+		case Constants.ALBUM_POPUP_HIDE: {
+			return {...state, show: false, img: undefined}
+		};
+
+		default: return state;
+	}
+}
+
 
 let reducerAlbum = combineReducers({
 	albums,
 	albumsNames,
 	selectedAlbum,
+	popup,
 })
 
 export default reducerAlbum
