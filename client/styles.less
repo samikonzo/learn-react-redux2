@@ -23,6 +23,13 @@ body{
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
+	
+	opacity: 0;
+	transition: 1s;
+
+	&--show{
+		opacity: 1;
+	}
 }
 .PhotoGrid_img-wrapper{
 	@size : 30%;

@@ -2,17 +2,30 @@ import React, { Component } from 'react';
 import Popup from './Popup.jsx'
 
 class PhotoGrid extends Component {
-	render() {
-		/*let { photo: album } = this.props
+	state = {
+		albumId: undefined
+	}
 
-		if(album){
-			var { photo } = album
-		} */
+	componentDidMount(){
+
+	}
+
+	componentWillReceiveProps(nextProps){
+		let { albumId } = nextProps
+		if( this.state.albumId !== albumId){
+			// dont need render
+			this.state.albumId = albumId
+
+			this.props.showPhoto()
+		}
+ 	}
+
+	render() {
 
 		let { photo } = this.props
 
 		return (
-			<div className="PhotoGrid">
+			<div className={this.props.className}>
 				{photo && photo.map && photo.map( link => {
 					return (
 						<div className="PhotoGrid_img-wrapper" key={link}>

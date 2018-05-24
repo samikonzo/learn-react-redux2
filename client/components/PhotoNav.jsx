@@ -10,7 +10,7 @@ class PhotoNav extends Component {
 						href="#" 
 						onClick={(e) => { 
 							e.preventDefault()
-							this.props.onChangeAlbum(nameObj.id) 
+							this.props.albumChangeHandler(nameObj.id) 
 						}}
 						className="PhotoNav_link"
 					>

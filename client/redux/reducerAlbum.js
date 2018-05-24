@@ -12,6 +12,7 @@ let initState = {
 	selectedAlbum: {
 		id: undefined,
 		loading: false,
+		show: false,
 	}
 }
 
@@ -56,17 +57,14 @@ let selectedAlbum = (state = initState.selectedAlbum, action) => {
 			return {...state, id: action.payload}
 		};
 
-		case Constants.ALBUM_LOAD: {
-			return {...state, loading: true}
+		case Constants.ALBUM_SHOWING: {
+			return {...state, show: true}
 		};
 
-		case Constants.ALBUM_LOAD_SUCCESS: {
-			return {...state, loading: false, error: false}
+		case Constants.ALBUM_HIDDING: {
+			return {...state, show: false}
 		};
 
-		case Constants.ALBUM_LOAD_FAIL: {
-			return {...state, loading: false, error: action.payload}
-		};
 
 		default: return state;
 	}
